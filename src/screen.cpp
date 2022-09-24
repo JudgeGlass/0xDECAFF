@@ -32,7 +32,7 @@ void Screen::drawBitmap(uint16_t x, uint16_t y, uint8_t* bitArray, uint16_t w, u
     }
 }
 
-void Screen::drawString(uint16_t x, uint16_t y, std::string &text, bool inverse){
+void Screen::drawString(uint16_t x, uint16_t y, std::string text, bool inverse){
     //std::transform(text.begin(), text.end(), text.begin(), ::toupper);
     int xOffset = 0;
     for(int i = 0; i < text.length(); i++){
@@ -99,6 +99,35 @@ void Screen::drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool setFi
             }
 
             
+        }
+    }
+}
+
+/*
+    Bresenham's line algorithm
+    https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+*/
+void Screen::drawLine(int x1, int y1, int x2, int y2){
+    int dx = abs(x2 - x1);
+    int sx = x1 < x2 ? 1 : -1;
+    int dy = -abs(y2 - y1);
+    int sy = y1 < y2 ? 1 : -1;
+    int error = dx + dy;
+
+    while(true){
+        drawPixel(Color::YELLOW, x1, y1);
+        if(x1 == x2 && y1 == y2) break;
+        int e2 = 2 * error;
+        if(e2 >= dy){
+            if(x1 == x2) break;
+            error += dy;
+            x1 += sx;
+        }
+
+        if(e2 <= dx){
+            if(y1 == y2) break;
+            error += dx;
+            y1 += sy;
         }
     }
 }

@@ -19,6 +19,8 @@ add_executable(PicoTests
     src/screen.h
     src/screen.cpp
     src/font.h
+    src/graph.h
+    src/graph.cpp
 )
 
 target_link_libraries(PicoTests pico_stdlib hardware_spi)

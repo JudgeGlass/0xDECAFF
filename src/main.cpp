@@ -1,7 +1,10 @@
 #include <cstdlib>
+#include <cmath>
 #include "pico/stdlib.h"
+
 #include "screen.h"
 #include "font.h"
+#include "graph.h"
 
 #define LED 25
 
@@ -10,18 +13,16 @@ int main(){
   gpio_set_dir(LED, GPIO_OUT);
 
   Screen s;
+  Graph g(&s, -10, 10, -10, 10, 320, 240);
   // s.drawRect(5, 5, 16, 16, true);
   // s.drawRect(25, 5, 16, 16, true);
   // s.drawRect(35, 35, 2, 2, true);
   //s.drawBitmap(30, 30, letterA(), 8, 8);
-  std::string ss = "Hello there!\nHow are you doing?\nDo you feel fine?\nQuick! Run!";
-  
-  s.drawString(5, 70, ss, true);
-  s.drawByteToBuffer(0b11001100, 100, 100, false);
-
-  s.drawHLine(0, 320, 16, 2);
-  s.drawVLine(0, 240, 160, 2);
-  s.renderFrameBuffer();
+  std::string ss = "f1(x)= 3*sin(x)";
+  g.drawFunc();
+  s.drawString(5, 5, ss, false);
+  //s.renderFrameBuffer();
+  g.render();
 
   
 

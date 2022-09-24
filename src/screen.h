@@ -26,7 +26,8 @@ class Screen{
         void drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool setFilled);
         void drawHLine(uint16_t sx, uint16_t ex, uint16_t y, uint8_t thickness);
         void drawVLine(uint16_t sy, uint16_t ey, uint16_t x, uint8_t thickness);
-        void drawString(uint16_t x, uint16_t y, std::string &text, bool inverse);
+        void drawLine(int x1, int y1, int x2, int y2);
+        void drawString(uint16_t x, uint16_t y, std::string text, bool inverse);
         void drawByteToBuffer(uint8_t d, uint16_t x, uint8_t y, bool inverse);
 
         void renderFrameBuffer();
