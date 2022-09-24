@@ -102,3 +102,19 @@ void Screen::drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool setFi
         }
     }
 }
+
+void Screen::drawHLine(uint16_t sx, uint16_t ex, uint16_t y, uint8_t thickness){
+    for(uint8_t i = 0; i < thickness; i++){
+        for(uint16_t xx = sx; xx < ex; xx++){
+            drawPixel(Color::GREEN, xx, y + i);
+        }
+    }
+}
+
+void Screen::drawVLine(uint16_t sy, uint16_t ey, uint16_t x, uint8_t thickness){
+    for(uint8_t i = 0; i < thickness; i++){
+        for(uint16_t yy = sy; yy < ey; yy++){
+            drawPixel(Color::GREEN, x + i, yy + i);
+        }
+    }
+}

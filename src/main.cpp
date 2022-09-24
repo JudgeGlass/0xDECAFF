@@ -16,8 +16,11 @@ int main(){
   //s.drawBitmap(30, 30, letterA(), 8, 8);
   std::string ss = "Hello there!\nHow are you doing?\nDo you feel fine?\nQuick! Run!";
   
-  //s.drawString(5, 70, ss, true);
+  s.drawString(5, 70, ss, true);
   s.drawByteToBuffer(0b11001100, 100, 100, false);
+
+  s.drawHLine(0, 320, 16, 2);
+  s.drawVLine(0, 240, 160, 2);
   s.renderFrameBuffer();
 
   
@@ -25,12 +28,8 @@ int main(){
 
   while(true){
     gpio_put(LED, 1);
-    s.drawString(5, 60, ss, true);
-    s.renderFrameBuffer();
     sleep_ms(300);
     gpio_put(LED, 0);
-    s.drawString(5, 60, ss, false);
-    s.renderFrameBuffer();
     sleep_ms(300);
     
 
