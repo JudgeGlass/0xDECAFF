@@ -36,10 +36,9 @@ void Screen::drawString(uint16_t x, uint16_t y, std::string &text, bool inverse)
     std::transform(text.begin(), text.end(), text.begin(), ::toupper);
     int xOffset = 0;
     for(int i = 0; i < text.length(); i++){
-        
         if(text[i] == '\n'){
             y += 8;
-            xOffset = i * 8;
+            xOffset = i * 8 + 8;
         }
 
         int index = chars.find((char)text[i]);
@@ -49,17 +48,14 @@ void Screen::drawString(uint16_t x, uint16_t y, std::string &text, bool inverse)
 
         if(index >= 0){
             for(int j = 0; j < 8; j++){
-                if(inverse){
-                    drawByteToBuffer(~fontArray[sx + (sy * 8 + j) * 32], x + (i * 8) - xOffset, y + j);
-                }else{
-                    drawByteToBuffer(fontArray[sx + (sy * 8 + j) * 32], x + (i * 8) - xOffset, y + j);
-                }
+                drawByteToBuffer(~fontArray[sx + (sy * 8 + j) * 32], x + (i * 8) - xOffset, y + j, inverse);
             }
         }
     }
 }
 
-void Screen::drawByteToBuffer(uint8_t d, uint16_t x, uint8_t y){
+void Screen::drawByteToBuffer(uint8_t d, uint16_t x, uint8_t y, bool inverse){
+    if(!inverse) d = ~d;
     for(int i = 0; i < 8; i++){
         uint8_t bit = (d << i) & 0b10000000;
         if(bit){
@@ -71,9 +67,15 @@ void Screen::drawByteToBuffer(uint8_t d, uint16_t x, uint8_t y){
 }
 
 void Screen::renderFrameBuffer(){
+    renderFrameBuffer(true);
+}
+
+void Screen::renderFrameBuffer(bool clear){
     ili9341_write_buffer((uint8_t *)_fbuff, sizeof(_fbuff));
     
-    clearBuffer();
+    if(clear){
+        clearBuffer();
+    }
 }
 
 void Screen::clearBuffer(){

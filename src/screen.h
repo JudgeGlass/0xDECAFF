@@ -7,11 +7,12 @@
 #include "ili9341.h"
 #include "font.h"
 
-static std::string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ      0123456789.,!?'\"-+=/\\%()<>:;_     " ;
+static std::string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ|*    0123456789.,!?'\"-+=/\\%()<>:;_     " ;
 
 enum Color{
     GREEN = 0b00011110,
-    BLACK = 0b00000000
+    BLACK = 0b00000000,
+    YELLOW = 0b11111111
 };
 
 class Screen{
@@ -24,9 +25,10 @@ class Screen{
         void drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
         void drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool setFilled);
         void drawString(uint16_t x, uint16_t y, std::string &text, bool inverse);
-        void drawByteToBuffer(uint8_t d, uint16_t x, uint8_t y);
+        void drawByteToBuffer(uint8_t d, uint16_t x, uint8_t y, bool inverse);
 
         void renderFrameBuffer();
+        void renderFrameBuffer(bool clear);
         void clearBuffer();
 
     private:
