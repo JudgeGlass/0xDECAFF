@@ -41,30 +41,4 @@ static const uint8_t fontArray[] = {
 };
 
 
-
-static uint8_t letter[8];
-
-// uint8_t* letterA(){
-//     for(int x = 0; x < 8; x++){
-//         for(int y = 0; y < 8; y++){
-//             uint8_t pix = fontArray[x + y * 256];
-//             letter[x + y * 8] = pix;
-//         }
-//     }
-
-//     return letter;
-// }
-
-static uint8_t* getLetter(uint16_t sx, uint16_t sy){
-    for(uint16_t xx = sx; xx < sx + 1; xx++){
-        for(uint16_t yy = sy; yy < sy + 1; yy++){
-            uint8_t pix = fontArray[xx + yy * 32];
-            letter[xx + yy] = pix;
-        }
-    }
-
-    return letter;
-}
-
-
 #endif

@@ -34,7 +34,14 @@ void Screen::drawBitmap(uint16_t x, uint16_t y, uint8_t* bitArray, uint16_t w, u
 
 void Screen::drawString(uint16_t x, uint16_t y, std::string &text, bool inverse){
     std::transform(text.begin(), text.end(), text.begin(), ::toupper);
+    int xOffset = 0;
     for(int i = 0; i < text.length(); i++){
+        
+        if(text[i] == '\n'){
+            y += 8;
+            xOffset = i * 8;
+        }
+
         int index = chars.find((char)text[i]);
 
         int sx = (index % 32);
@@ -43,21 +50,13 @@ void Screen::drawString(uint16_t x, uint16_t y, std::string &text, bool inverse)
         if(index >= 0){
             for(int j = 0; j < 8; j++){
                 if(inverse){
-                    drawByteToBuffer(~fontArray[sx + (sy * 8 + j) * 32], x + (i * 8) , y + j);
+                    drawByteToBuffer(~fontArray[sx + (sy * 8 + j) * 32], x + (i * 8) - xOffset, y + j);
                 }else{
-                    drawByteToBuffer(fontArray[sx + (sy * 8 + j) * 32], x + (i * 8) , y + j);
+                    drawByteToBuffer(fontArray[sx + (sy * 8 + j) * 32], x + (i * 8) - xOffset, y + j);
                 }
             }
         }
     }
-
-    // drawByteToBuffer(fontArray[0], 0, 0);               // x + y * 32
-    // drawByteToBuffer(fontArray[1 * 32], 0, 1);
-    // drawByteToBuffer(fontArray[2 * 32], 0, 2);
-    // drawByteToBuffer(fontArray[3 * 32], 0, 3);
-    // drawByteToBuffer(fontArray[4 * 32], 0, 4);
-    // drawByteToBuffer(fontArray[5 * 32], 0, 5);
-    // drawByteToBuffer(fontArray[6 * 32], 0, 6);
 }
 
 void Screen::drawByteToBuffer(uint8_t d, uint16_t x, uint8_t y){

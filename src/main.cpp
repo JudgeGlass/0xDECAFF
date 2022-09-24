@@ -14,9 +14,9 @@ int main(){
   // s.drawRect(25, 5, 16, 16, true);
   // s.drawRect(35, 35, 2, 2, true);
   //s.drawBitmap(30, 30, letterA(), 8, 8);
-  std::string ss = "ABCDEFGHIJKLMNOPQRSTUPWXYZ 1234567890";
+  std::string ss = "ABCDEFGHIJKLMNOPQRSTUPWXYZ\n 1234567890\n.,!?'\"-+=/\\%()<>:;_";
   s.drawString(5, 60, ss, false);
-  s.drawString(5, 70, ss, true);
+  //s.drawString(5, 70, ss, true);
   s.drawByteToBuffer(0b11001100, 100, 100);
   s.renderFrameBuffer();
 
