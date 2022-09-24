@@ -7,7 +7,7 @@
 #include "ili9341.h"
 #include "font.h"
 
-static std::string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ|*    0123456789.,!?'\"-+=/\\%()<>:;_     " ;
+static std::string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ|*^   0123456789.,!?'\"-+=/\\%()<>:;_   abcdefghijklmnopqrstuvwxyz      " ;
 
 enum Color{
     GREEN = 0b00011110,

@@ -14,8 +14,8 @@ int main(){
   // s.drawRect(25, 5, 16, 16, true);
   // s.drawRect(35, 35, 2, 2, true);
   //s.drawBitmap(30, 30, letterA(), 8, 8);
-  std::string ss = "/-\\|";
-  s.drawString(5, 60, ss, true);
+  std::string ss = "Hello there!\nHow are you doing?\nDo you feel fine?\nQuick! Run!";
+  
   //s.drawString(5, 70, ss, true);
   s.drawByteToBuffer(0b11001100, 100, 100, false);
   s.renderFrameBuffer();
@@ -24,18 +24,17 @@ int main(){
 
 
   while(true){
-    // gpio_put(LED, 1);
-    // sleep_ms(300);
-    // gpio_put(LED, 0);
-    // sleep_ms(300);
+    gpio_put(LED, 1);
+    s.drawString(5, 60, ss, true);
+    s.renderFrameBuffer();
+    sleep_ms(300);
+    gpio_put(LED, 0);
+    s.drawString(5, 60, ss, false);
+    s.renderFrameBuffer();
+    sleep_ms(300);
     
-    for(int i = 0; i < 4; i++){
-      std::string ssss = "Loading: ";
-      ssss.push_back(ss.at(i));
-      s.drawString(50, 50, ssss, false);
-      s.renderFrameBuffer();
-      sleep_ms(100);
-    }
+
+
 
   }
 

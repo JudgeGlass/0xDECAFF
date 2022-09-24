@@ -33,7 +33,7 @@ void Screen::drawBitmap(uint16_t x, uint16_t y, uint8_t* bitArray, uint16_t w, u
 }
 
 void Screen::drawString(uint16_t x, uint16_t y, std::string &text, bool inverse){
-    std::transform(text.begin(), text.end(), text.begin(), ::toupper);
+    //std::transform(text.begin(), text.end(), text.begin(), ::toupper);
     int xOffset = 0;
     for(int i = 0; i < text.length(); i++){
         if(text[i] == '\n'){
@@ -58,11 +58,7 @@ void Screen::drawByteToBuffer(uint8_t d, uint16_t x, uint8_t y, bool inverse){
     if(inverse) d = ~d;
     for(int i = 0; i < 8; i++){
         uint8_t bit = (d << i) & 0b10000000;
-        if(bit){
-            drawPixel(Color::GREEN, x + i, y);
-        }else{
-            drawPixel(Color::BLACK, x + i, y);
-        }
+        drawPixel((bit) ? Color::GREEN : Color::BLACK, x + i, y);
     }
 }
 
