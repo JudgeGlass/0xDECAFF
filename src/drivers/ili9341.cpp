@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "pico/stdlib.h"
 #include "hardware/spi.h"
-#include "ili9341.h"
+#include <drivers/ili9341.h>
 
 #define SPI_PORT spi0
 #define PIN_CS   17

@@ -1,6 +1,6 @@
-#include "screen.h"
+#include <screen.hpp>
 
-#include "font.h"
+#include <font.hpp>
 
 Screen::Screen(){
     ili9341_init_SPI();

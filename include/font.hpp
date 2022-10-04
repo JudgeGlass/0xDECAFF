@@ -3,7 +3,7 @@
 
 #include <string>
 #include <algorithm>
-#include "screen.h"
+#include <screen.hpp>
 
 // javl.github.io/image2cpp/
 // plain bytes, Horizontal 1bit per pixel

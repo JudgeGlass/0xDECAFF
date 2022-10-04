@@ -2,7 +2,7 @@
 #define __GRAPH_H__
 
 #include <cmath>
-#include "screen.h"
+#include <screen.hpp>
 
 class Graph{
     public:

@@ -11,16 +11,14 @@ pico_sdk_init()
 
 # rest of your project
 
+include_directories("include")
 
 add_executable(PicoTests
-    src/main.cpp
-    src/ili9341.cpp
-    src/ili9341.h
-    src/screen.h
-    src/screen.cpp
-    src/font.h
-    src/graph.h
-    src/graph.cpp
+    src/DECAFF/main.cpp
+    src/drivers/ili9341.cpp
+    src/DECAFF/screen.cpp    
+    src/DECAFF/graph.cpp    
+    src/DECAFF/calculator.cpp
 )
 
 target_link_libraries(PicoTests pico_stdlib hardware_spi)

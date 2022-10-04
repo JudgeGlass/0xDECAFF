@@ -4,8 +4,8 @@
 #include <string>
 
 #include "pico/stdlib.h"
-#include "ili9341.h"
-#include "font.h"
+#include <drivers/ili9341.h>
+#include <font.hpp>
 
 static std::string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ|*^   0123456789.,!?'\"-+=/\\%()<>:;_   abcdefghijklmnopqrstuvwxyz      " ;
 

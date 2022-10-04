@@ -1,4 +1,4 @@
-#include "graph.h"
+#include <graph.hpp>
 
 Graph::Graph(Screen *screen, double xMin, double xMax, double yMin, double yMax, int pxWidth, int pxHeight){
     this->screen = screen;
@@ -38,11 +38,11 @@ void Graph::drawLine(double x1, double y1, double x2, double y2){
 }
 
 void Graph::drawFunc(){
-    double lastY = 3*sin(xMin);
+    double lastY = 3*cos(xMin);
     double lastX = xMin;
 
-    for(double i = xMin; i <= xMax; i += 0.04){
-        double y1 = 3*sin(i);
+    for(double i = xMin; i <= xMax; i += 0.004){
+        double y1 = 3 * cos(i);
 
         drawLine(lastX, lastY, i, y1);
 
