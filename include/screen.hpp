@@ -1,7 +1,8 @@
-#ifndef __SCREEN_H__
-#define __SCREEN_H__
+#ifndef __SCREEN_HPP__
+#define __SCREEN_HPP__
 
 #include <string>
+#include <algorithm>
 
 #include "pico/stdlib.h"
 #include <drivers/ili9341.h>

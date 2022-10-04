@@ -15,6 +15,8 @@ void Screen::drawPixel(uint16_t color, uint16_t x, uint16_t y){
         return;
     uint16_t * pix = &_fbuff[(320-x-1)*240+y];
     (*pix) = (uint16_t) color;
+
+    renderFrameBuffer(false);
 }
 
 void Screen::drawBitmap(uint16_t x, uint16_t y, uint8_t* bitArray, uint16_t w, uint16_t h){
@@ -54,6 +56,9 @@ void Screen::drawString(uint16_t x, uint16_t y, std::string text, bool inverse){
     }
 }
 
+/*
+    Draws the bits of a byte at a certain x and y value. Inverse flips the bits.
+*/
 void Screen::drawByteToBuffer(uint8_t d, uint16_t x, uint8_t y, bool inverse){
     if(inverse) d = ~d;
     for(int i = 0; i < 8; i++){
@@ -75,9 +80,7 @@ void Screen::renderFrameBuffer(bool clear){
 }
 
 void Screen::clearBuffer(){
-    for(int i = 0; i < 320 * 240; i++){
-        _fbuff[i] = 0;
-    }
+    std::fill(_fbuff, _fbuff + 320 * 240, 0);
 }
 
 void Screen::drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h){

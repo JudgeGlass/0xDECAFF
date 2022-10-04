@@ -1,5 +1,5 @@
-#ifndef __FONT_H__
-#define __FONT_H__
+#ifndef __FONT_HPP__
+#define __FONT_HPP__
 
 #include <string>
 #include <algorithm>

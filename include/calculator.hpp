@@ -1,8 +1,8 @@
-#ifndef __CALCULATOR_H__
-#define __CALCULATOR_H__
+#ifndef __CALCULATOR_HPP__
+#define __CALCULATOR_HPP__
 
-#include <screen.hpp>
 #include <graph.hpp>
+#include <screen.hpp>
 
 enum State{
     CALCULATION,
@@ -13,16 +13,22 @@ enum State{
 
 enum ProcessorState{
     CALCULATING,
-    INTURRUPT
+    INTURRUPT,
+    READY
 };
 
 class Calculator{
     public:
         Calculator();
         ~Calculator();
+
+        void update();
     private:
-        Graph *graph;
-        Screen *screen;
+        Screen *screen = nullptr;
+        Graph *graph = nullptr;
+        
+        State currentState;
+        ProcessorState currentProcessorState;
 
 };
 

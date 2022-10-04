@@ -34,21 +34,31 @@ void Graph::drawLine(double x1, double y1, double x2, double y2){
 
     int xx = (int)((x2 - xMin) / xScale);
     int yy = pxHeight - (int)((y2 - yMin) / yScale);
+
     screen->drawLine(xG, yG, xx, yy);
 }
 
 void Graph::drawFunc(){
-    double lastY = 3*cos(xMin);
+    double lastY = pow(xMin, 3);
     double lastX = xMin;
 
-    for(double i = xMin; i <= xMax; i += 0.004){
-        double y1 = 3 * cos(i);
+    for(double i = xMin; i <= xMax; i += 0.0004){
+        double y1 = pow(i, 3);
+
+        if(y1 > yMax || y1 < yMin) continue;
 
         drawLine(lastX, lastY, i, y1);
 
         lastX = i;
         lastY = y1;
     }
+}
+
+void Graph::update(){
+    bool updateDisp = false;
+
+
+    if(updateDisp) drawFunc();
 }
 
 void Graph::makeAxis(){

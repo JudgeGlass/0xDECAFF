@@ -1,5 +1,5 @@
-#ifndef __GRAPH_H__
-#define __GRAPH_H__
+#ifndef __GRAPH_HPP__
+#define __GRAPH_HPP__
 
 #include <cmath>
 #include <screen.hpp>
@@ -19,8 +19,12 @@ class Graph{
 
         void makeAxis();
 
+        void update();
+
     private:
         Screen *screen;
+
+
         double xMin;
         double xMax;
         double yMin;

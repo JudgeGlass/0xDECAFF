@@ -15,10 +15,12 @@ include_directories("include")
 
 add_executable(PicoTests
     src/DECAFF/main.cpp
-    src/drivers/ili9341.cpp
     src/DECAFF/screen.cpp    
     src/DECAFF/graph.cpp    
     src/DECAFF/calculator.cpp
+    
+    src/drivers/ili9341.cpp
+    src/drivers/keymatrix.cpp
 )
 
 target_link_libraries(PicoTests pico_stdlib hardware_spi)
