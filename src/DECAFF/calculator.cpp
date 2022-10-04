@@ -12,18 +12,10 @@ Calculator::Calculator(){
 
     // TEMP JUST FOR TESTING
 
-    std::string func = "8*(sin(x))^2-6x+8^x";
-    tokenizer = new Tokenizer(func);
+    std::string func = "3+(5-8)*5";
+    sy = new ShuntingYard(func);
 
-    screen->drawString(5, 5, "Exp: " + func, false);
-    std::vector<std::string> tokens = tokenizer->getTokens();
-
-    std::string strTokens;
-    for(const auto& t: tokens){
-        strTokens += t;
-    }
-
-    screen->drawString(5, 20, "Tokens:\n " + strTokens, false);
+    screen->drawString(5, 5, "OUT:\n" + sy->toRPN(screen), false);
 
     screen->renderFrameBuffer();
     // END TEMP
@@ -51,7 +43,7 @@ void Calculator::update(){
 }
 
 Calculator::~Calculator(){
-    delete tokenizer;           // DELETE ME!!!
+    delete sy;           // DELETE ME!!!
     delete screen;
     delete graph;
 }

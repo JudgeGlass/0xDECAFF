@@ -3,7 +3,7 @@
 
 #include <graph.hpp>
 #include <screen.hpp>
-#include <core/tokenizer.hpp>
+#include <core/shuntingyard.hpp>
 
 enum State{
     CALCULATION,
@@ -31,7 +31,7 @@ class Calculator{
         State currentState;
         ProcessorState currentProcessorState;
 
-        Tokenizer *tokenizer;
+        ShuntingYard *sy;
 
 };
 
