@@ -21,6 +21,8 @@ add_executable(PicoTests
     
     src/drivers/ili9341.cpp
     src/drivers/keymatrix.cpp
+
+    src/DECAFF/core/tokenizer.cpp
 )
 
 target_link_libraries(PicoTests pico_stdlib hardware_spi)

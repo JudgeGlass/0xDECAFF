@@ -15,8 +15,6 @@ void Screen::drawPixel(uint16_t color, uint16_t x, uint16_t y){
         return;
     uint16_t * pix = &_fbuff[(320-x-1)*240+y];
     (*pix) = (uint16_t) color;
-
-    renderFrameBuffer(false);
 }
 
 void Screen::drawBitmap(uint16_t x, uint16_t y, uint8_t* bitArray, uint16_t w, uint16_t h){
@@ -35,7 +33,6 @@ void Screen::drawBitmap(uint16_t x, uint16_t y, uint8_t* bitArray, uint16_t w, u
 }
 
 void Screen::drawString(uint16_t x, uint16_t y, std::string text, bool inverse){
-    //std::transform(text.begin(), text.end(), text.begin(), ::toupper);
     int xOffset = 0;
     for(int i = 0; i < text.length(); i++){
         if(text[i] == '\n'){
