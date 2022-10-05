@@ -2,61 +2,52 @@
 
 ShuntingYard::ShuntingYard(std::string &expression){
     this->expression = expression;
+    this->expression.erase(std::remove_if(this->expression.begin(), this->expression.end(), ::isspace), this->expression.end());
 
     tokenizer = new Tokenizer(this->expression);
 }
 
-std::string ShuntingYard::toRPN(Screen *screen){      //REMOVE SCREEN
+std::string ShuntingYard::toRPN(){      //REMOVE SCREEN
     std::vector<std::string> output;
-    std::vector<std::string> opStack;
+    std::stack<std::string> opStack;
 
-    std::vector<std::string> tokens = tokenizer->getTokens();
+    std::vector<std::string> tokens = tokenizer->getTokens();   
+    
+    for(const auto& t: tokens){
 
-    std::vector<std::string>::iterator it = tokens.begin();
-    while(it != tokens.end()){
-
-        std::string token = *it;
-
+        std::string token = t;
         if(isNum(token)){
             output.push_back(token);
         }else if(token == "("){
-            opStack.push_back(token);
+            opStack.push(token);
         }else if(token == ")"){
-            while(opStack.at(opStack.size() - 1) != "("){
-                output.push_back(opStack.at(opStack.size() - 1));
-                opStack.erase(opStack.end());
-                
-                screen->drawString(5, 100, "OP: " + opStack.at(opStack.size() - 1), false);
-                screen->renderFrameBuffer(false);
-
-                if(opStack.at(opStack.size() - 1) == "(")
-                    break;
+            while(opStack.top() != "("){
+                output.push_back(opStack.top());
+                opStack.pop();
             }
 
-            opStack.erase(opStack.end());
+            opStack.pop();
         }else{
             if(opStack.empty()){
-                opStack.push_back(token);
+                opStack.push(token);
             }else{
-                int pres = getPrecedence(token[0]);
-                while(opStack.at(opStack.size() - 1) != "(" && ((getPrecedence(opStack.at(opStack.size() - 1)[0]) > pres) || (getPrecedence(opStack.at(opStack.size() - 1)[0]) == pres))){
-                    output.push_back(opStack.at(opStack.size() - 1));
+                int pres = getPrecedence(token.at(0));
+                while(opStack.top() != "(" && ((getPrecedence(opStack.top().at(0)) > pres) || ((getPrecedence(opStack.top().at(0)) == pres) && getAssociativity(opStack.top().at(0))))){
+                    output.push_back(opStack.top());
                                     
-                    opStack.erase(opStack.end());
+                    opStack.pop();
 
                     if(opStack.empty())
                         break;
                 }
-                opStack.push_back(token);
+                opStack.push(token);
             }
         }
-
-        ++it;
     }
 
     while(!opStack.empty()){
-        output.push_back(opStack.at(opStack.size() - 1));
-        opStack.erase(opStack.end());
+        output.push_back(opStack.top());
+        opStack.pop();
     }
 
     std::string strOut;
@@ -87,6 +78,26 @@ int ShuntingYard::getPrecedence(const char &c){
     }
 }
 
+/*
+    True: left
+    False: right
+*/
+bool ShuntingYard::getAssociativity(const char &c){
+    switch (c)
+    {
+    case '*':
+    case '/':
+    case '+':
+    case '-':
+        return true;
+    case '^':
+        return false;
+    
+    default:
+        return true;
+    }
+}
+
 bool ShuntingYard::isNum(std::string &s){
     char c = s.at(0);
     return isdigit(c);
@@ -95,4 +106,3 @@ bool ShuntingYard::isNum(std::string &s){
 ShuntingYard::~ShuntingYard(){
     delete tokenizer;
 }
-

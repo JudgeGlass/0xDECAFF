@@ -1,11 +1,11 @@
 #ifndef __SHUNTINGYARD_HPP__
 #define __SHUNTINGYARD_HPP__
 
+#include <iostream>
 #include <string>
 #include <algorithm>
 #include <stack>
 
-#include <screen.hpp>
 #include <core/tokenizer.hpp>
 
 class ShuntingYard{
@@ -13,10 +13,11 @@ class ShuntingYard{
         ShuntingYard(std::string &expression);
         ~ShuntingYard();
 
-        std::string toRPN(Screen *screen);
+        std::string toRPN();
 
         int getPrecedence(const char &c);
-
+        
+        bool getAssociativity(const char &c);
         bool isNum(std::string &s);
 
     private:

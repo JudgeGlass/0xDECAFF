@@ -11,7 +11,11 @@ std::vector<std::string> Tokenizer::getTokens(){
     for(uint16_t index = 0; index < expression.size(); index++){
         char currentChar = expression.at(index);
         if(isDelim(currentChar)){
-            tokens.push_back(expression.substr(lastFound, index - lastFound));
+            std::string t = expression.substr(lastFound, index - lastFound);
+            
+            if(t.size() != 0 || !t.empty()){
+                tokens.push_back(t);
+            }
             std::string str(1, currentChar);
             tokens.push_back(str);
             lastFound = index + 1;

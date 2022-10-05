@@ -12,10 +12,11 @@ Calculator::Calculator(){
 
     // TEMP JUST FOR TESTING
 
-    std::string func = "3+(5-8)*5";
+    std::string func = "3+4*2/(1-5)^2^3";
     sy = new ShuntingYard(func);
 
-    screen->drawString(5, 5, "OUT:\n" + sy->toRPN(screen), false);
+    screen->drawString(5, 5, "Infix: " + func, false);
+    screen->drawString(5, 16,"  RPN: " + sy->toRPN(), false);
 
     screen->renderFrameBuffer();
     // END TEMP
