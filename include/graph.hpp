@@ -3,11 +3,12 @@
 
 #include <cmath>
 #include <screen.hpp>
+#include <core/shuntingyard.hpp>
 
 class Graph{
     public:
         Graph(Screen *screen, double xMin, double xMax, double yMin, double yMax, int pxWidth, int pxHeight);
-
+        ~Graph();
         void render();
 
         void rescale();
@@ -16,6 +17,7 @@ class Graph{
         void vLine(double x1);
         void drawLine(double x1, double y1, double x2, double y2);
         void drawFunc();
+        void setF1(std::string &f1);
 
         void makeAxis();
 
@@ -23,6 +25,8 @@ class Graph{
 
     private:
         Screen *screen;
+        ShuntingYard *f1;
+        
 
 
         double xMin;

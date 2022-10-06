@@ -7,19 +7,22 @@ Calculator::Calculator(){
 
     currentState = State::GRAPH;
 
-    // graph->drawFunc();
-    // graph->render();
+    std::string func = "3*cbrt(x)-2";
 
-    // TEMP JUST FOR TESTING
+    graph->setF1(func);
 
-    std::string func = "3+4*2/(1-5)^2^3";
-    sy = new ShuntingYard(func);
+    graph->drawFunc();
+    // ShuntingYard sy(func);
+    // for(double x = 0; x < 5; x+=0.5){
+    //     double y = sy.eval(x);
+    //     screen->drawString(5, 5, "X: " + std::to_string(x) + "  Y: " + std::to_string(y), false);
+    //     screen->renderFrameBuffer();
+    // }
 
-    screen->drawString(5, 5, "Infix: " + func, false);
-    screen->drawString(5, 16,"  RPN: " + sy->toRPN(), false);
 
-    screen->renderFrameBuffer();
-    // END TEMP
+
+    graph->render();
+
 }
 
 void Calculator::update(){

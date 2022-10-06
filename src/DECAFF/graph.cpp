@@ -11,6 +11,12 @@ Graph::Graph(Screen *screen, double xMin, double xMax, double yMin, double yMax,
 
     this->xScale = (this->xMax-this->xMin) /(double) pxWidth;
     this->yScale = (this->yMax - this->yMin) / (double) pxHeight;
+
+    f1 = nullptr;
+}
+
+void Graph::setF1(std::string &f1){
+    this->f1 = new ShuntingYard(f1);
 }
 
 void Graph::rescale(){
@@ -39,15 +45,18 @@ void Graph::drawLine(double x1, double y1, double x2, double y2){
 }
 
 void Graph::drawFunc(){
-    double lastY = pow(xMin, 3);
+    if(f1 == nullptr) return;
+
+    double lastY = f1->eval(xMin);
     double lastX = xMin;
 
-    for(double i = xMin; i <= xMax; i += 0.0004){
-        double y1 = pow(i, 3);
+    for(double i = xMin; i <= xMax; i += 0.02){
+        double y1 = f1->eval(i);
 
         if(y1 > yMax || y1 < yMin) continue;
 
         drawLine(lastX, lastY, i, y1);
+        screen->renderFrameBuffer(false);
 
         lastX = i;
         lastY = y1;
@@ -74,5 +83,9 @@ void Graph::makeAxis(){
 void Graph::render(){
     makeAxis();
 
-    screen->renderFrameBuffer();
+    screen->renderFrameBuffer(false);
+}
+
+Graph::~Graph(){
+    delete f1;
 }

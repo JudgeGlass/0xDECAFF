@@ -24,6 +24,7 @@ add_executable(PicoTests
 
     src/DECAFF/core/tokenizer.cpp
     src/DECAFF/core/shuntingyard.cpp
+    src/DECAFF/core/function.cpp
 )
 
 target_link_libraries(PicoTests pico_stdlib hardware_spi)

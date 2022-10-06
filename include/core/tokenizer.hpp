@@ -1,3 +1,4 @@
+
 #ifndef __TOKENIZER_HPP__
 #define __TOKENIZER_HPP__
 
@@ -8,11 +9,11 @@ class Tokenizer{
     public:
         Tokenizer(std::string &expression);
 
-        
+        void setExpression(std::string &expression);
+        void replaceMinus();       
         std::vector<std::string> getTokens();
-    private:
         bool isDelim(const char &c);
-
+    private:
         std::string expression;
         std::string delims = "+-/*()^,";
 
