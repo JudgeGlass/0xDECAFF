@@ -7,7 +7,7 @@ Calculator::Calculator(){
 
     currentState = State::GRAPH;
 
-    std::string func = "3*cbrt(x)-2";
+    std::string func = "3*sin(x)-2";
 
     graph->setF1(func);
 
@@ -26,9 +26,18 @@ Calculator::Calculator(){
 }
 
 void Calculator::update(){
+
+    // for(int x = 0; x < 40; x++){
+    //     for(int y = 0; y < 30; y++){
+    //         screen->drawString(x * 8, y * 8, "A", false);
+    //     }
+    // }
+
+    screen->renderFrameBuffer();
+
     switch(currentState){
         case State::CALCULATION:
-
+            calculator();
             break;
         
         case State::FUNCTION:
@@ -43,6 +52,19 @@ void Calculator::update(){
 
             break;
 
+    }
+}
+
+void Calculator::calculator(){
+    char key = pico_keypad_get_key();
+
+    if(key == 'E'){
+        ShuntingYard sy(keyBuff);
+
+    }
+
+    if(key){
+        keyBuff += key;
     }
 }
 

@@ -13,7 +13,7 @@ pico_sdk_init()
 
 include_directories("include")
 
-add_executable(PicoTests
+add_executable(PicoTest
     src/DECAFF/main.cpp
     src/DECAFF/screen.cpp    
     src/DECAFF/graph.cpp    

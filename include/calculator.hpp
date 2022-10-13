@@ -1,6 +1,8 @@
 #ifndef __CALCULATOR_HPP__
 #define __CALCULATOR_HPP__
 
+#include <drivers/keymatrix.h>
+
 #include <graph.hpp>
 #include <screen.hpp>
 #include <core/shuntingyard.hpp>
@@ -23,10 +25,12 @@ class Calculator{
         Calculator();
         ~Calculator();
 
+        void calculator();
         void update();
     private:
         Screen *screen = nullptr;
         Graph *graph = nullptr;
+        std::string keyBuff;
         
         State currentState;
         ProcessorState currentProcessorState;
