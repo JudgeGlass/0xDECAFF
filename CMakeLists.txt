@@ -27,7 +27,7 @@ add_executable(PicoTests
     src/DECAFF/core/function.cpp
 )
 
-target_link_libraries(PicoTests pico_stdlib hardware_spi)
+target_link_libraries(PicoTests pico_stdlib hardware_spi pico_multicore)
 
 pico_add_extra_outputs(PicoTests)
 

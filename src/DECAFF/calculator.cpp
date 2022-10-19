@@ -25,15 +25,19 @@ Calculator::Calculator(){
 
 }
 
-void Calculator::update(){
 
+
+void Calculator::update(){
+    char key;
+    while((key = pico_keypad_get_key(screen)) == 0);
+    screen->drawString(5, 5, std::string(1, key), false);
     // for(int x = 0; x < 40; x++){
     //     for(int y = 0; y < 30; y++){
     //         screen->drawString(x * 8, y * 8, "A", false);
     //     }
     // }
 
-    screen->renderFrameBuffer();
+    screen->renderFrameBuffer(false);
 
     switch(currentState){
         case State::CALCULATION:
@@ -56,7 +60,7 @@ void Calculator::update(){
 }
 
 void Calculator::calculator(){
-    char key = pico_keypad_get_key();
+    char key = pico_keypad_get_key(screen);
 
     if(key == 'E'){
         ShuntingYard sy(keyBuff);

@@ -56,7 +56,7 @@ void Graph::drawFunc(){
         if(y1 > yMax || y1 < yMin) continue;
 
         drawLine(lastX, lastY, i, y1);
-        screen->renderFrameBuffer(false);
+        //screen->renderFrameBuffer(false);
 
         lastX = i;
         lastY = y1;

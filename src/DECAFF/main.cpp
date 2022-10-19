@@ -1,18 +1,14 @@
 #include <cstdlib>
 #include <cmath>
 #include "pico/stdlib.h"
+#include "pico/multicore.h"
 
 #include <calculator.hpp>
 #include <drivers/keymatrix.h>
 
 #define LED 25
 
-char matrix[16] = {
-  '1', '2', '3', '+',
-  '4', '5', '6', '-',
-  '7', '8', '9', '^',
-  '*', '0', '/', 'E'
-};
+
 
 int main(){
   gpio_init(LED);
@@ -20,7 +16,7 @@ int main(){
 
   Calculator calc;
 
-  pico_keypad_init(cols, rows, matrix);
+  pico_keypad_init();
 
   while(true){
     //keymatrix_read_keys();
