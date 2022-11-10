@@ -18,6 +18,7 @@ add_executable(PicoTests
     src/DECAFF/screen.cpp    
     src/DECAFF/graph.cpp    
     src/DECAFF/calculator.cpp
+    src/DECAFF/calcwindow.cpp
     
     src/drivers/ili9341.cpp
     src/drivers/keymatrix.cpp
