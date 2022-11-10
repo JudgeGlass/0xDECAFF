@@ -6,7 +6,6 @@
 #include <algorithm>
 #include <stack>
 
-#include "screen.hpp"
 #include "tokenizer.hpp"
 #include "function.hpp"
 
@@ -18,7 +17,7 @@ class ShuntingYard{
         std::vector<std::string> toRPN();
         double eval();
         double eval(double x);
-        double r_eval(std::vector<std::string> &rpnExpression);
+        double r_eval(std::vector<std::string> rpnExpression);
 
         int getPrecedence(const char &c);
         

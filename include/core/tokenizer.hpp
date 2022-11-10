@@ -15,7 +15,7 @@ class Tokenizer{
         bool isDelim(const char &c);
     private:
         std::string expression;
-        std::string delims = "+-/*()^,";
+        std::string delims = "+-/*()^,&|";
 
 };
 

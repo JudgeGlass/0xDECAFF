@@ -19,11 +19,11 @@ int main(){
   pico_keypad_init();
 
   while(true){
-    //keymatrix_read_keys();
-    gpio_put(LED, 1);
-    sleep_ms(300);
-    gpio_put(LED, 0);
-    sleep_ms(300);
+    // //keymatrix_read_keys();
+    // gpio_put(LED, 1);
+    // sleep_ms(300);
+    // gpio_put(LED, 0);
+    // sleep_ms(300);
 
     calc.update();
   }

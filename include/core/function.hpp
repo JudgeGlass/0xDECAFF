@@ -11,13 +11,20 @@
 #include "functions/sqrt.hpp"
 #include "functions/max.hpp"
 #include "functions/sin.hpp"
+#include "functions/cos.hpp"
 #include "functions/cbrt.hpp"
+#include "functions/abs.hpp"
 
 #include "functions/add.hpp"
 #include "functions/minus.hpp"
 #include "functions/mul.hpp"
 #include "functions/div.hpp"
 #include "functions/pow.hpp"
+
+#include "functions/leftshift.hpp"
+#include "functions/rightshift.hpp"
+#include "functions/logicor.hpp"
+#include "functions/logicand.hpp"
 
 class Function{
     public:

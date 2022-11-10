@@ -4,8 +4,9 @@
 Calculator::Calculator(){
     screen = new Screen();
     graph = new Graph(screen, -10, 10, -10, 10, 320, 240);
+    calcWindow = new CalcWindow();
 
-    currentState = State::GRAPH;
+    currentState = State::CALCULATION;
 
     std::string func = "3*sin(x)-2";
 
@@ -28,20 +29,10 @@ Calculator::Calculator(){
 
 
 void Calculator::update(){
-    char key;
-    while((key = pico_keypad_get_key(screen)) == 0);
-    screen->drawString(5, 5, std::string(1, key), false);
-    // for(int x = 0; x < 40; x++){
-    //     for(int y = 0; y < 30; y++){
-    //         screen->drawString(x * 8, y * 8, "A", false);
-    //     }
-    // }
-
-    screen->renderFrameBuffer(false);
-
+    
     switch(currentState){
         case State::CALCULATION:
-            calculator();
+            calcWindow->update(screen);
             break;
         
         case State::FUNCTION:
@@ -60,7 +51,7 @@ void Calculator::update(){
 }
 
 void Calculator::calculator(){
-    char key = pico_keypad_get_key(screen);
+    char key = pico_keypad_get_key();
 
     if(key == 'E'){
         ShuntingYard sy(keyBuff);
@@ -76,4 +67,5 @@ Calculator::~Calculator(){
     delete sy;           // DELETE ME!!!
     delete screen;
     delete graph;
+    delete calcWindow;
 }

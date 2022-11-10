@@ -5,6 +5,7 @@
 
 #include <graph.hpp>
 #include <screen.hpp>
+#include <calcwindow.hpp>
 #include <core/shuntingyard.hpp>
 
 enum State{
@@ -30,6 +31,7 @@ class Calculator{
     private:
         Screen *screen = nullptr;
         Graph *graph = nullptr;
+        CalcWindow *calcWindow = nullptr;
         std::string keyBuff;
         
         State currentState;

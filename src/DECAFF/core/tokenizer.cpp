@@ -1,4 +1,5 @@
 #include <core/tokenizer.hpp>
+#include <iostream>
 
 Tokenizer::Tokenizer(std::string &expression){
     this->expression = expression;

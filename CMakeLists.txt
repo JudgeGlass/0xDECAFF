@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 
 # initialize the SDK based on PICO_SDK_PATH
 # note: this must happen before project()
+set(PICO_CXX_ENABLE_EXCEPTIONS  1)
 include(pico_sdk_import.cmake)
 
 project(PicoTests)
@@ -27,6 +28,7 @@ add_executable(PicoTests
     src/DECAFF/core/shuntingyard.cpp
     src/DECAFF/core/function.cpp
 )
+
 
 target_link_libraries(PicoTests pico_stdlib hardware_spi pico_multicore)
 

@@ -17,11 +17,11 @@ void pico_keypad_init() {
     
 }
 
-char pico_keypad_get_key(Screen *s) {
+char pico_keypad_get_key() {
     for(int c = 0; c < COL_COUNT; c++){
-        asm volatile("nop \n nop \n nop");
+        sleep_ms(7);
         gpio_put(cols[c], 1);
-        asm volatile("nop \n nop \n nop");
+        sleep_ms(7);
         uint8_t rowStat[7];
 
         rowStat[0] = gpio_get(rows[0]);
@@ -30,15 +30,7 @@ char pico_keypad_get_key(Screen *s) {
         rowStat[3] = gpio_get(rows[3]);
         rowStat[4] = gpio_get(rows[4]);
         rowStat[5] = gpio_get(rows[5]);
-        rowStat[6] = gpio_get(rows[6]);
-
-        std::string cols_s;
-        cols_s.append("C: " + std::to_string(c));
-        for(int i = 0; i < 7; i++){
-            cols_s.append(std::to_string(rowStat[i]) + " ");
-        }
-
-        
+        rowStat[6] = gpio_get(rows[6]);        
 
         if(rowStat[0] + rowStat[1] + rowStat[2] + rowStat[3] + rowStat[4] + rowStat[5] + rowStat[6] != 0){
             int i;
@@ -48,21 +40,24 @@ char pico_keypad_get_key(Screen *s) {
                 }
             }
 
-            s->drawString(5, 15, "R: " + std::to_string(i) + "   C: " + std::to_string(c), true);
-            s->drawString(5, 30, cols_s, true);
-            s->renderFrameBuffer(false);
-
-            asm volatile("nop \n nop \n nop");
+            sleep_ms(7);
             gpio_put(cols[c], 0);
-            asm volatile("nop \n nop \n nop");
+            sleep_ms(7);
 
             return matrix[i][c];
         }
 
-        asm volatile("nop \n nop \n nop");
+        sleep_ms(7);
         gpio_put(cols[c], 0);
-        asm volatile("nop \n nop \n nop");
+        sleep_ms(7);
 
     }
     return '\0';
+}
+
+char getKey(){
+    sleep_ms(65);
+    char key;
+    while((key = pico_keypad_get_key()) == 0);
+    return key;
 }
