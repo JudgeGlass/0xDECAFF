@@ -20,6 +20,8 @@ void ili9341_init_drawing();
 // add interface for buffer
 void ili9341_write_buffer(uint8_t * buffer, uint32_t size_of_buffer);
 void ili9341_write_buffer16(uint16_t *buffer, uint32_t size);
+void ili9341_plot_pixel(uint16_t c, uint16_t r, uint16_t color);
+void ili9341_clear_buffer();
 
 
 #endif//ILI_9341_H_

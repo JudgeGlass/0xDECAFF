@@ -8,7 +8,7 @@
 #include <drivers/ili9341.h>
 #include <font.hpp>
 
-static std::string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ|*^   0123456789.,!?'\"-+=/\\%()<>:;_   abcdefghijklmnopqrstuvwxyz      " ;
+static std::string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ|*^   0123456789.,!?'\"-+=/\\%()<>:;_   abcdefghijklmnopqrstuvwxyz█     " ;
 
 enum Color{
     GREEN = 0b00011110,
@@ -21,6 +21,7 @@ class Screen{
         Screen();
         
         void drawPixel(uint16_t color, uint16_t x, uint16_t y);
+        void drawPixelRAM(uint16_t color, uint16_t x, uint16_t y);
         void drawBitmap(uint16_t x, uint16_t y, uint8_t* bitArray, uint16_t w, uint16_t h);
 
         void drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h);

@@ -18,6 +18,10 @@ void pico_keypad_init() {
 }
 
 char pico_keypad_get_key() {
+    if(cool > 0){
+        cool--;
+        return '\0';
+    }
     for(int c = 0; c < COL_COUNT; c++){
         sleep_ms(7);
         gpio_put(cols[c], 1);
@@ -43,7 +47,7 @@ char pico_keypad_get_key() {
             sleep_ms(7);
             gpio_put(cols[c], 0);
             sleep_ms(7);
-
+            cool = 1000;
             return matrix[i][c];
         }
 
@@ -52,6 +56,7 @@ char pico_keypad_get_key() {
         sleep_ms(7);
 
     }
+    cool = 1000;
     return '\0';
 }
 

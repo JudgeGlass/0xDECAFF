@@ -24,8 +24,8 @@ class Graph{
         void update();
 
     private:
-        Screen *screen;
-        ShuntingYard *f1;
+        Screen *screen = nullptr;
+        ShuntingYard *f1 = nullptr;
         
 
 

@@ -300,3 +300,46 @@ void ili9341_write_buffer(uint8_t * buffer, uint32_t size_of_buffer)
 void ili9341_write_buffer16(uint16_t *buffer, uint32_t size){
     spi_write16_blocking(SPI_PORT, buffer, size);
 }
+
+void ili9341_plot_pixel(uint16_t c, uint16_t r, uint16_t color){
+    cs_deselect();
+    dc_select();
+    send_command(ILI9341_PASET);
+    send_short(c);
+    send_short(c);
+
+    send_command(ILI9341_CASET);
+    send_short(r);
+    send_short(r);
+
+    //sleep_ms(10);
+    send_command(ILI9341_RAMWR);
+    
+    cs_select();
+    dc_deselect();
+
+    send_short(color);
+}
+
+void ili9341_clear_buffer(){
+    cs_deselect();
+    dc_select();
+    send_command(ILI9341_PASET);
+    send_short(0);
+    send_short(319);
+
+    send_command(ILI9341_CASET);
+    send_short(0);
+    send_short(239);
+
+    send_command(ILI9341_RAMWR);
+
+    cs_select();
+    dc_deselect();
+
+
+    for(int i = 0; i < 240 * 320; i++){
+        send_short(0);
+        send_short(0);
+    }
+}

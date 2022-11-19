@@ -10,6 +10,7 @@
 
 static uint cols[5] = {0, 1, 2, 3, 4};
 static uint rows[7] = {5, 6, 7, 8, 9, 10, 11};
+static uint cool = 0;
 
 static char matrix[7][5] = {
   {'7', '8', '9', '+', 'B'},

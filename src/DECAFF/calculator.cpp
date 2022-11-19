@@ -8,9 +8,12 @@ Calculator::Calculator(){
 
     currentState = State::CALCULATION;
 
-    std::string func = "3*sin(x)-2";
+    std::string func = "2-sin(x-2)";
 
     graph->setF1(func);
+
+    screen->drawString(5, 5, "Please Wait...", false);
+    screen->renderFrameBuffer();
 
     graph->drawFunc();
     // ShuntingYard sy(func);
@@ -33,6 +36,7 @@ void Calculator::update(){
     switch(currentState){
         case State::CALCULATION:
             calcWindow->update(screen);
+            //ili9341_plot_pixel(40, 14, (uint16_t)0xf800);
             break;
         
         case State::FUNCTION:

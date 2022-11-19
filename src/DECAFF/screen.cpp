@@ -14,7 +14,11 @@ void Screen::drawPixel(uint16_t color, uint16_t x, uint16_t y){
     if (x >= 320 || y >= 240)
         return;
     uint16_t * pix = &_fbuff[(320-x-1)*240+y];
-    (*pix) = (uint16_t) color;
+    (*pix) = (uint16_t) color; 
+}
+
+void drawPixelRAM(uint16_t color, uint16_t x, uint16_t y){
+    ili9341_plot_pixel(320-x , y, (uint16_t)color);
 }
 
 void Screen::drawBitmap(uint16_t x, uint16_t y, uint8_t* bitArray, uint16_t w, uint16_t h){
@@ -78,6 +82,12 @@ void Screen::renderFrameBuffer(bool clear){
 
 void Screen::clearBuffer(){
     std::fill(_fbuff, _fbuff + 320 * 240, 0);
+    // for(int x = 0; x < 320; x++){
+    //     for(int y = 0; y < 240; y++){
+    //         drawPixel(0, x, y);
+    //     }
+    // }
+    //ili9341_clear_buffer();
 }
 
 void Screen::drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h){
