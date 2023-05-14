@@ -58,6 +58,7 @@ void Graph::drawFunc(){
         drawLine(lastX, lastY, i, y1);
         //screen->renderFrameBuffer(false);
 
+
         lastX = i;
         lastY = y1;
     }

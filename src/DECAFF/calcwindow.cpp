@@ -1,8 +1,9 @@
 #include "calcwindow.hpp"
+#include <stdio.h>
 
 CalcWindow::CalcWindow(){
     std::fill(characterBuffer, characterBuffer + 40 * 30, '\0');
-    cursorX = 0;
+    cursorX = -1;
     cursorY = 0;
 }
 
@@ -28,15 +29,22 @@ void CalcWindow::update(Screen *screen){
     drawBuffer(screen);
     
 
-    char key = getKey();
+    //char key = getKey();
+    char key = getchar();
+    if(key != 0xD || key != 0x7F)
+        printf("%c", key);
+    else if(key == 0xD)
+        printf("\n");
 
-    if(key == 'B'){
+    if(key == 0x7F){ // Backspace
         characterBuffer[cursorX + cursorY * 40] = 0;
         cursorX--;
         return;
     }
 
-    if(key == '\n'){
+    //printf("Cursor X: %d", cursorX);
+
+    if(key == 0xD){ // New line
         std::string func = "";
         for(int i = 1; i < cursorX + 1; i++){
             func += (characterBuffer[i + cursorY * 40]);
@@ -54,7 +62,8 @@ void CalcWindow::update(Screen *screen){
         return;
     }
 
-    if(++cursorX > 40){
+    cursorX++;
+    if(cursorX > 40){
         cursorX = 0;
         cursorY++;
     }

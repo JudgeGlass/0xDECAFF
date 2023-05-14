@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <cmath>
+#include <stdio.h>
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
 
@@ -11,6 +12,10 @@
 
 
 int main(){
+  stdio_init_all();
+
+  
+
   gpio_init(LED);
   gpio_set_dir(LED, GPIO_OUT);
 
@@ -24,7 +29,7 @@ int main(){
     // sleep_ms(300);
     // gpio_put(LED, 0);
     // sleep_ms(300);
-
+    //printf("TEST");
     calc.update();
   }
 

@@ -8,7 +8,7 @@ Calculator::Calculator(){
 
     currentState = State::CALCULATION;
 
-    std::string func = "2-sin(x-2)";
+    std::string func = "2+sqrt(x-2)";
 
     graph->setF1(func);
 

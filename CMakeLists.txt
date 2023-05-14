@@ -32,6 +32,10 @@ add_executable(PicoTests
 
 target_link_libraries(PicoTests pico_stdlib hardware_spi pico_multicore)
 
+pico_enable_stdio_usb(PicoTests 1)
+set(PICO_CXX_ENABLE_EXCEPTIONS 1)
+set(PICO_CXX_ENABLE_RTTI 1)
+
 pico_add_extra_outputs(PicoTests)
 
 
