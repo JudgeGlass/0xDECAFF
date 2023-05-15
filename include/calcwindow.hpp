@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <screen.hpp>
 #include <drivers/keymatrix.h>
+#include <drivers/serialkeyboard.hpp>
 #include <core/shuntingyard.hpp>
 
 class CalcWindow{

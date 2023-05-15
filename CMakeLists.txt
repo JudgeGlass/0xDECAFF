@@ -23,6 +23,7 @@ add_executable(PicoTests
     
     src/drivers/ili9341.cpp
     src/drivers/keymatrix.cpp
+    src/drivers/serialkeyboard.cpp
 
     src/DECAFF/core/tokenizer.cpp
     src/DECAFF/core/shuntingyard.cpp
