@@ -25,12 +25,31 @@ void CalcWindow::setChar(const char c){
 }
 
 void CalcWindow::update(Screen *screen){
-    screen->drawRect((cursorX + 1) * 8, cursorY * 8, 8, 8, true);
     drawBuffer(screen);
-    
+    if(characterBuffer[(cursorX + 1) + cursorY * 40] != 0){
+        screen->drawHLine((cursorX+1) * 8, (cursorX+1) * 8 + 8, cursorY*8+8, 2);
+    }else{
+        screen->drawRect((cursorX+1) * 8, cursorY * 8, 8, 8, true);
+    }
 
     //char key = getKey();
     char key = getchar();
+
+    if(key == 0x1b){
+        special_key_t key = escapeSequence();
+        if(key == UP){
+            cursorY--;
+        }else if(key == DOWN){
+            cursorY++;
+        }else if(key == LEFT){
+            cursorX--;
+        }else if(key == RIGHT){
+            cursorX++;
+        }
+
+        return;
+    }
+
     if(key != 0xD || key != 0x7F)
         printf("%c", key);
     else if(key == 0xD)
@@ -46,16 +65,19 @@ void CalcWindow::update(Screen *screen){
 
     if(key == 0xD){ // New line
         std::string func = "";
-        for(int i = 1; i < cursorX + 1; i++){
+        for(int i = 0; i < cursorX + 1; i++){
+            if(characterBuffer[i + cursorY * 40] == 0) continue;
             func += (characterBuffer[i + cursorY * 40]);
         }
-        ShuntingYard sy(func);
-        std::string ans = std::to_string(sy.eval());
-        
+        if(!func.empty()){
+            ShuntingYard sy(func);
+            std::string ans = std::to_string(sy.eval());
+            
 
-        cursorY++;
-        for(int i = 0; i< ans.length(); i++){
-            characterBuffer[(40 - (ans.length() - i)) + cursorY * 40] = ans.at(i);
+            cursorY++;
+            for(int i = 0; i< ans.length(); i++){
+                characterBuffer[(40 - (ans.length() - i)) + cursorY * 40] = ans.at(i);
+            }
         }
         cursorX = 0;
         cursorY++;
